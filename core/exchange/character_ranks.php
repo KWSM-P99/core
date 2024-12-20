@@ -22,7 +22,7 @@ if (!class_exists('exchange_character_ranks')){
         public function get_character_ranks($params, $arrBody){
             // Check if the request is authenticated via API token
             $isAPITokenRequest = $this->pex->getIsApiTokenRequest();
-            if ($isAPITokenRequest){
+            if ($isAPITokenRequest || $this->user->check_pageobjects(array('points'), 'AND', false)) {
                 // Retrieve a list of character IDs
                 $arrCharacters = $this->pdh->get('member', 'id_list', array(false, false, false));
                 $arrCharacterRanks = array();
